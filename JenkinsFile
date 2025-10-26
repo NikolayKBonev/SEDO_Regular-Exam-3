@@ -1,0 +1,24 @@
+pipeline{
+    agent any{
+        label "node"
+    }
+    stages{
+        stage("Restore .NetPackages:"){
+            steps{
+                bat 'dotnet restore'
+            }
+            
+        }
+        stage("Build .Net Project"){
+        steps{
+            bat 'dotnet build --no-restore'
+        }
+        }
+        stage("Run Unit and Integration Tests"){
+        steps{
+            bat 'dotnet test --no-build -- verbosity normal'
+    
+    }
+}
+    } 
+}
